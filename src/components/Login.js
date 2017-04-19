@@ -23,14 +23,20 @@ class Login extends Component {
                         }}
                     />
 
-                    <View>
+                    <View style={styles.viewForm}>
                         <Text style={{
-                            color: 'white'
-                        }}>Username</Text>
+                            color: 'white',
+                            textAlign: 'right',
+                            fontWeight:'bold',
+                            fontSize:18,
+                            marginRight: 10,
+                            flex: 1
+                        }}>Username :</Text>
                         <TextInput
                             style={{
                                 height: 40,
-                                backgroundColor: 'white'
+                                backgroundColor: 'white',
+                                flex: 2
                             }}
                         />
                     </View>
@@ -47,6 +53,11 @@ const styles = StyleSheet.create({
         width: null,
         height: null,
         flex: 1
+    },
+    viewForm: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 10
     }
 });
 export default Login;
