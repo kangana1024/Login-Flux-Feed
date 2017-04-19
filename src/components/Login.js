@@ -30,6 +30,14 @@ class Login extends Component {
                         />
                     </View>
 
+                    <View style={styles.viewForm}>
+                        <Text style={styles.labelLogin}>Password :</Text>
+                        <TextInput
+                            style={styles.inputLogin}
+                            secureTextEntry={true}
+                        />
+                    </View>
+
                 </View>
 
             </Image>
