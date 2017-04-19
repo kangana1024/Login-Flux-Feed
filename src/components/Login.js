@@ -24,20 +24,9 @@ class Login extends Component {
                     />
 
                     <View style={styles.viewForm}>
-                        <Text style={{
-                            color: 'white',
-                            textAlign: 'right',
-                            fontWeight:'bold',
-                            fontSize:18,
-                            marginRight: 10,
-                            flex: 1
-                        }}>Username :</Text>
+                        <Text style={styles.labelLogin}>Username :</Text>
                         <TextInput
-                            style={{
-                                height: 40,
-                                backgroundColor: 'white',
-                                flex: 2
-                            }}
+                            style={styles.inputLogin}
                         />
                     </View>
 
@@ -58,6 +47,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         margin: 10
+    },
+    labelLogin: {
+        color: 'white',
+        textAlign: 'right',
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginRight: 10,
+        flex: 1
+    },
+    inputLogin: {
+        height: 40,
+        backgroundColor: 'white',
+        flex: 2
     }
 });
 export default Login;
