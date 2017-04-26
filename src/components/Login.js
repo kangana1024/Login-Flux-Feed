@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Image, TextInput, StyleSheet, Alert } from 'react-native';
+import { Button, Icon } from 'native-base';
 
 class Login extends Component {
-    state = {}
+    state = {
+        username: '',
+        password: ''
+    }
+    checkPassword() {
+        var { username, password } = this.state;
+        if ((username === 'admin') && (password === '123456')) {
+            alert('Username ถูก');
+        } else {
+            Alert.alert(
+                'Error',
+                'Login Error',
+                [
+                    { text: 'OK' }
+                ],
+                { cancelable: false }
+            )
+        }
+    }
     render() {
         return (
             <Image source={require('../images/bg.jpg')}
@@ -27,6 +46,7 @@ class Login extends Component {
                         <Text style={styles.labelLogin}>Username :</Text>
                         <TextInput
                             style={styles.inputLogin}
+                            onChangeText={(username) => this.setState({ username })}
                         />
                     </View>
 
@@ -35,11 +55,25 @@ class Login extends Component {
                         <TextInput
                             style={styles.inputLogin}
                             secureTextEntry={true}
+                            onChangeText={(password) => this.setState({ password })}
                         />
                     </View>
 
-                </View>
+                    <Button iconLeft rounded style={{
+                        alignSelf: 'center',
+                        marginTop: 20
+                    }}
+                        onPress={this.checkPassword.bind(this)}>
+                        <Icon name='md-lock' />
+                        <Text style={{
+                            color: 'white',
+                            fontWeight: 'bold',
+                            fontSize: 20
+                        }}>Login</Text>
+                    </Button>
 
+                </View>
+                <Text>Username : {this.state.username} Password : {this.state.password}</Text>
             </Image>
         );
     }
