@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, Alert } from 'react-native';
 import { Button, Icon } from 'native-base';
+import {Actions} from 'react-native-router-flux';
 
 class Login extends Component {
     state = {
@@ -10,7 +11,7 @@ class Login extends Component {
     checkPassword() {
         var { username, password } = this.state;
         if ((username === 'admin') && (password === '123456')) {
-            alert('Username ถูก');
+            Actions.contentfeed({type:'reset'});
         } else {
             Alert.alert(
                 'Error',
