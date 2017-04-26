@@ -9,7 +9,7 @@ class Login extends Component {
         password: ''
     }
     checkPassword() {
-        var { username, password } = this.state;
+        /* var { username, password } = this.state;
         if ((username === 'admin') && (password === '123456')) {
             Actions.contentfeed({type:'reset'});
         } else {
@@ -21,7 +21,8 @@ class Login extends Component {
                 ],
                 { cancelable: false }
             )
-        }
+        }*/
+        Actions.contentfeed({type:'reset'});
     }
     render() {
         return (
