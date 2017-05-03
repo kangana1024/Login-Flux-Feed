@@ -76,7 +76,9 @@ class Login extends Component {
 
                     <Button transparent style={{
                         alignSelf: 'center'
-                    }}>
+                    }}
+                    onPress={()=>Actions.register()}
+                    >
                         <Text style={{
                             fontSize: 20,
                             fontWeight: 'bold',

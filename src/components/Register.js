@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, Alert, Keyboard, ActivityIndicator } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import {checkLogin,signupAsync} from '../helper';
+import { checkLogin, signupAsync } from '../helper';
 
 import LoadingViewComponent from './LoadingComponent'
 
@@ -12,6 +12,43 @@ class Register extends Component {
         password: '',
         repassword: '',
         isLoading: false
+    }
+    async _checkLogin() {
+        let { firebase } = this.props;
+        let { email, password } = this.state;
+
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password); // Login firebase
+
+            console.log("Account created");
+            Actions.contentfeed({ type: 'reset' });
+        } catch (error) {
+            alert(error.toString());
+            this.setState({ isLoading: false });
+        }
+
+    }
+    async signupAsync() {
+        this.setState({ isLoading: true });
+        let { firebase } = this.props;
+        let { email, password } = this.state;
+
+        try {
+            let auth = await firebase.auth();
+            await auth.createUserWithEmailAndPassword(email, password);
+            this._checkLogin();
+        } catch (error) {
+            alert(error.toString());
+            this.setState({ isLoading: false });
+        }
+    }
+    checkPassword() {
+        let { password, repassword } = this.state;
+        if (password === repassword) {
+            this.signupAsync();
+        } else {
+            alert("Password ไม่ตรง")
+        }
     }
     render() {
         return (
@@ -65,7 +102,8 @@ class Register extends Component {
                         alignSelf: 'center',
                         marginTop: 20
                     }}
-                        onPress={()=>signupAsync(this)}>
+                        onPress={this.checkPassword.bind(this)}
+                    >
                         <Icon name='md-lock' />
                         <Text style={{
                             color: 'white',
