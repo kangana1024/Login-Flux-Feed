@@ -7,6 +7,7 @@ import {
 import { Scene, Router } from 'react-native-router-flux';
 import Login from './components/Login'
 import ContentFeed from './components/ContentFeed'
+import * as firebase from 'firebase'
 
 export default class App extends Component {
     render() {

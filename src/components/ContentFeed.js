@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, ListView, Image, TouchableOpacity, Linking } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Card, Thumbnail, CardItem } from 'native-base';
 
+import AppFooter from './AppFooter'
+import LoadingComponent from './LoadingComponent'
+
 const apiKey = 'AIzaSyAFYk7Kahr_8n-mTCE29K-x5lv2kgrd1aA';
 const channelID = 'UC5mJrJ6tg1WiGGWzoKK7ewQ';
 
@@ -24,6 +27,7 @@ class ContentFeed extends Component {
     constructor() {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        
         this.state = {
             dataSource: ds.cloneWithRows([]),
         };
@@ -71,17 +75,6 @@ class ContentFeed extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>Header</Title>
-                    </Body>
-                    <Right />
-                </Header>
                 <Content>
                     <ListView
                         dataSource={this.state.dataSource}
@@ -89,13 +82,8 @@ class ContentFeed extends Component {
                         enableEmptySections={true}
                     />
                 </Content>
-                <Footer>
-                    <FooterTab>
-                        <Button full>
-                            <Text>Footer</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
+                <AppFooter onLogout={true}/>
+                <LoadingComponent isLoading={false} />
             </Container>
         );
     }
