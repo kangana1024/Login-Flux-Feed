@@ -1,28 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, TextInput, StyleSheet, Alert, Keyboard, ActivityIndicator } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import {checkLogin,signupAsync} from '../helper';
 
-class Login extends Component {
+import LoadingViewComponent from './LoadingComponent'
+
+class Register extends Component {
     state = {
-        username: '',
-        password: ''
-    }
-    checkPassword() {
-        /* var { username, password } = this.state;
-        if ((username === 'admin') && (password === '123456')) {
-            Actions.contentfeed({type:'reset'});
-        } else {
-            Alert.alert(
-                'Error',
-                'Login Error',
-                [
-                    { text: 'OK' }
-                ],
-                { cancelable: false }
-            )
-        }*/
-        Actions.contentfeed({ type: 'reset' });
+        email: '',
+        password: '',
+        repassword: '',
+        isLoading: false
     }
     render() {
         return (
@@ -45,10 +34,11 @@ class Login extends Component {
                     />
 
                     <View style={styles.viewForm}>
-                        <Text style={styles.labelLogin}>Username :</Text>
+                        <Text style={styles.labelLogin}>Email :</Text>
                         <TextInput
                             style={styles.inputLogin}
-                            onChangeText={(username) => this.setState({ username })}
+                            onBlur={() => { Keyboard.dismiss() }}
+                            onChangeText={(email) => this.setState({ email })}
                         />
                     </View>
 
@@ -57,7 +47,17 @@ class Login extends Component {
                         <TextInput
                             style={styles.inputLogin}
                             secureTextEntry={true}
+                            onBlur={() => { Keyboard.dismiss() }}
                             onChangeText={(password) => this.setState({ password })}
+                        />
+                    </View>
+                    <View style={styles.viewForm}>
+                        <Text style={styles.labelLogin}>Repassword :</Text>
+                        <TextInput
+                            style={styles.inputLogin}
+                            secureTextEntry={true}
+                            onBlur={() => { Keyboard.dismiss() }}
+                            onChangeText={(repassword) => this.setState({ repassword })}
                         />
                     </View>
 
@@ -65,27 +65,33 @@ class Login extends Component {
                         alignSelf: 'center',
                         marginTop: 20
                     }}
-                        onPress={this.checkPassword.bind(this)}>
+                        onPress={()=>signupAsync(this)}>
                         <Icon name='md-lock' />
                         <Text style={{
                             color: 'white',
                             fontWeight: 'bold',
                             fontSize: 20
-                        }}>Login</Text>
-                    </Button>
-
-                    <Button transparent style={{
-                        alignSelf: 'center'
-                    }}>
-                        <Text style={{
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                            color: 'white'
                         }}>Register</Text>
                     </Button>
 
+                    <Button
+                        onPress={() => Actions.login({ type: 'reset' })}
+                        transparent primary
+                        style={{
+                            alignSelf: 'center'
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                textAlign: 'center',
+                                marginTop: 20,
+                                color: 'white'
+                            }}>Login</Text>
+                    </Button>
+
                 </View>
-                <Text>Username : {this.state.username} Password : {this.state.password}</Text>
+                <LoadingViewComponent isLoading={this.state.isLoading} />
             </Image>
         );
     }
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'right',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 17,
         marginRight: 10,
         flex: 1
     },
@@ -116,4 +122,4 @@ const styles = StyleSheet.create({
         flex: 2
     }
 });
-export default Login;
+export default Register;

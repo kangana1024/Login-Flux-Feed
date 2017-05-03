@@ -13,23 +13,29 @@ class ContentFeed extends Component {
         this.getJsonFeed();
     }
     async getJsonFeed() {
+        this.setState({isLoading:true});
         try {
             const response = await fetch('https://www.googleapis.com/youtube/v3/search?key=' + apiKey + '&channelId=' + channelID + '&part=snippet,id&order=date&maxResults=20');// ข้อมูลดิบ
 
             const responseJson = await response.json(); // แปลงเป็น Json
 
-            this.setState({ dataSource: this.state.dataSource.cloneWithRows(responseJson.items) });
+            this.setState({ 
+                dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
+                isLoading:false
+            });
 
         } catch (error) {
             alert(error.toString());
+            this.setState({isLoading:false});
         }
     }
     constructor() {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        
+
         this.state = {
             dataSource: ds.cloneWithRows([]),
+            isLoading:false
         };
     }
     renderRowCard(rowData) {
@@ -83,7 +89,7 @@ class ContentFeed extends Component {
                     />
                 </Content>
                 <AppFooter onLogout={true}/>
-                <LoadingComponent isLoading={false} />
+                <LoadingComponent isLoading={this.state.isLoading} />
             </Container>
         );
     }
