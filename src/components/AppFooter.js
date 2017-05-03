@@ -18,8 +18,8 @@ export default class AppFooter extends Component {
         this.setState({ activeTabName: tab });
         if (tab === 'contentfeed') {
             Actions.contentfeed({ type: 'reset' });
-        } else if (tab === 'noteapp') {
-            Actions.noteapp({ type: 'reset' })
+        } else if (tab === 'firebasenoteapp') {
+            Actions.firebasenoteapp({ type: 'reset' })
         }else if(tab === 'imageuploadapp'){
             Actions.imageuploadapp()
         }
@@ -35,6 +35,12 @@ export default class AppFooter extends Component {
                         onPress={() => { this.tabAction('contentfeed') }}>
                         <Icon name="paper" />
                         <Text>Feed</Text>
+                    </Button>
+                    <Button
+                        active={(this.state.activeTabName === "firebasenoteapp") ? true : false}
+                        onPress={() => { this.tabAction('firebasenoteapp') }}>
+                        <Icon name="paper" />
+                        <Text>App Note</Text>
                     </Button>
                 </FooterTab>
             </Footer>

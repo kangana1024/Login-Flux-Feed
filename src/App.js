@@ -8,6 +8,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import Login from './components/Login'
 import ContentFeed from './components/ContentFeed'
 import Register from './components/Register'
+import FirebaseNoteApp from './components/FirebaseNoteApp'
 import * as firebase from 'firebase'
 
 export default class App extends Component {
@@ -30,8 +31,8 @@ export default class App extends Component {
                     <Scene key="login" component={Login} title="Login" hideNavBar firebase={firebase} />
 
                     <Scene key="register" component={Register} title="register" hideNavBar firebase={firebase} />
-
-
+                    <Scene key="firebasenoteapp" component={FirebaseNoteApp} title="firebasenoteapp" hideNavBar firebase={firebase} />
+                    
                     <Scene key="contentfeed" component={ContentFeed} title="Youtube Feed" hideNavBar />
 
                 </Scene>
