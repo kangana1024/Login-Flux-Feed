@@ -25,11 +25,11 @@ class ContentFeed extends Component {
         super();
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+            dataSource: ds.cloneWithRows([]),
         };
     }
     renderRowCard(rowData) {
-        let {title} = rowData.snippet
+        let { title, description, publishedAt, thumbnails } = rowData.snippet;
         return (
             <Card >
                 <CardItem>
@@ -70,6 +70,7 @@ class ContentFeed extends Component {
                     <ListView
                         dataSource={this.state.dataSource}
                         renderRow={(rowData) => this.renderRowCard(rowData)}
+                        enableEmptySections={true}
                     />
                 </Content>
                 <Footer>
