@@ -4,6 +4,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 
 import AppFooter from './AppFooter'
 import LoadingComponent from './LoadingComponent'
+import {signoutAsync} from '../helper'
 
 const apiKey = 'AIzaSyAFYk7Kahr_8n-mTCE29K-x5lv2kgrd1aA';
 const channelID = 'UC5mJrJ6tg1WiGGWzoKK7ewQ';
@@ -88,7 +89,7 @@ class ContentFeed extends Component {
                         enableEmptySections={true}
                     />
                 </Content>
-                <AppFooter onLogout={true}/>
+                <AppFooter onLogout={()=>signoutAsync(this)} tabName="contentfeed"/>
                 <LoadingComponent isLoading={this.state.isLoading} />
             </Container>
         );

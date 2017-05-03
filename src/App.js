@@ -31,9 +31,10 @@ export default class App extends Component {
                     <Scene key="login" component={Login} title="Login" hideNavBar firebase={firebase} />
 
                     <Scene key="register" component={Register} title="register" hideNavBar firebase={firebase} />
+
                     <Scene key="firebasenoteapp" component={FirebaseNoteApp} title="firebasenoteapp" hideNavBar firebase={firebase} />
-                    
-                    <Scene key="contentfeed" component={ContentFeed} title="Youtube Feed" hideNavBar />
+
+                    <Scene key="contentfeed" component={ContentFeed} title="Youtube Feed" hideNavBar  firebase={firebase} />
 
                 </Scene>
             </Router>

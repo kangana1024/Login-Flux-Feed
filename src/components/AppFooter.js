@@ -39,8 +39,14 @@ export default class AppFooter extends Component {
                     <Button
                         active={(this.state.activeTabName === "firebasenoteapp") ? true : false}
                         onPress={() => { this.tabAction('firebasenoteapp') }}>
-                        <Icon name="paper" />
+                        <Icon name="md-clipboard" />
                         <Text>App Note</Text>
+                    </Button>
+                    <Button
+                        active={(this.state.activeTabName === "logout") ? true : false}
+                        onPress={onLogout}>
+                        <Icon name="md-lock" />
+                        <Text>Logout</Text>
                     </Button>
                 </FooterTab>
             </Footer>

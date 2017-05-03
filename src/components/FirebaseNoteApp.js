@@ -16,14 +16,14 @@ class FirebaseNoteApp extends Component {
             noteText: '',
             isLoading:false
         };
-        this.itemsRef = this.getRef().child('items');
+        this.itemsRef = this.getRef().child('items'); // อ้างอิงถึงลูกชื่อ items ในฐานข้อมูล
     }
 
     getRef() { // connect firebase database
         let { firebase } = this.props;
-        return firebase.database().ref();
+        return firebase.database().ref(); // อ้างอิงถึง root
     }
-    listenForItems(itemsRef) {
+    listenForItems(itemsRef) { // function update listview
         itemsRef.on('value', (snap) => {
             
             // get children as an array
@@ -31,6 +31,7 @@ class FirebaseNoteApp extends Component {
             snap.forEach((child) => {
                 items.push({
                     title: child.val().title,
+                    desc:child.val().desc,
                     _key: child.key
                 });
             });
@@ -52,7 +53,7 @@ class FirebaseNoteApp extends Component {
                 'Delete row',
                 null,
                 [
-                    { text: 'Delete', onPress: (text) => this.itemsRef.child(item._key).remove() },
+                    { text: 'Delete', onPress: (text) => this.itemsRef.child(item._key).remove() /* ลบแถว */ },
                     { text: 'Cancel', onPress: (text) => console.log('Cancelled') }
                 ]
             );
@@ -62,12 +63,13 @@ class FirebaseNoteApp extends Component {
 
             <ListItem onPress={onPress} >
                 <Text>{item.title}</Text>
+                <Text>{item.desc}</Text>
             </ListItem>
 
         );
     }
     _addItem() {
-        this.itemsRef.push({ title: this.state.noteText });
+        this.itemsRef.push({ title: this.state.noteText,desc:'ccc' });
         this.setState({ noteText: '' });
     }
     render() {
@@ -109,7 +111,7 @@ class FirebaseNoteApp extends Component {
                         enableEmptySections={true}
                     />
                 </Content>
-                <AppFooter onLogout={() => signoutAsync(this)} tabName="noteapp" />
+                <AppFooter onLogout={() => signoutAsync(this)} tabName="firebasenoteapp" />
                 <LoadingViewComponent isLoading={this.state.isLoading} />
             </Container>
         );
