@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, Alert } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import {checkLogin} from '../helper'
 
 class Login extends Component {
     state = {
-        username: '',
+        email: '',
         password: ''
     }
     checkPassword() {
@@ -45,10 +46,10 @@ class Login extends Component {
                     />
 
                     <View style={styles.viewForm}>
-                        <Text style={styles.labelLogin}>Username :</Text>
+                        <Text style={styles.labelLogin}>Email :</Text>
                         <TextInput
                             style={styles.inputLogin}
-                            onChangeText={(username) => this.setState({ username })}
+                            onChangeText={(email) => this.setState({ email })}
                         />
                     </View>
 
@@ -65,7 +66,7 @@ class Login extends Component {
                         alignSelf: 'center',
                         marginTop: 20
                     }}
-                        onPress={this.checkPassword.bind(this)}>
+                        onPress={()=>checkLogin(this)}>
                         <Icon name='md-lock' />
                         <Text style={{
                             color: 'white',
@@ -87,7 +88,7 @@ class Login extends Component {
                     </Button>
 
                 </View>
-                <Text>Username : {this.state.username} Password : {this.state.password}</Text>
+                <Text>Username : {this.state.email} Password : {this.state.password}</Text>
             </Image>
         );
     }
